@@ -1,0 +1,27 @@
+import discord
+import asyncio
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('login')
+    print(client.user.name)
+    print(client.user.id)
+    print('-----------------')
+    await client.change_presence(game=discord.Game(name='현존하는 최고인공지능'))
+
+@client.event
+async def on_message(message):
+    if message.content.startswith('![your message]'):
+        file = open("[file(txt)name].txt", "w")
+        file.write('[file contents]')
+        file.close()
+
+        
+    if message.content.startswith('!빅별노트북'):
+        file = open("[file(txt)name].txt")
+        await client.send_message(message.channel, file.read())
+        file.close()        
+
+client.run('[your discord bot token]')
