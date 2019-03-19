@@ -1,0 +1,20 @@
+import discord
+import asyncio
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('login')
+    print(client.user.name)
+    print(client.user.id)
+    print('-----------------')
+    await client.change_presence(game=discord.Game(name='[your DiscordBot's simple information]'))
+
+@client.event
+async def on_message(message):
+    if message.content.startswith('![User's message]'):
+        await client.send_message(message.channel, "DiscordBot's answer")
+
+
+client.run('DiscordBot Token')
