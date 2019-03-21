@@ -14,7 +14,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith('![User's message]'):
-        await client.send_message(message.channel, "DiscordBot's answer")
+        await client.send_message(message.channel, "[DiscordBot's answer]")
 
 
 client.run('DiscordBot Token')
