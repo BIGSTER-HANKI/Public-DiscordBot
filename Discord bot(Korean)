@@ -15,11 +15,11 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=game)
 
 @client.event
-async def on_message(message):
+async def on_message(message):  #This is check that is online
     if message.content.startswith("!bs 온라인"):
         await message.channel.send("봇 온라인 완료")
 
-    if message.content.startswith("!bs경고"):
+    if message.content.startswith("!bs경고"):     #This is made with the purpose to give a warning.  #But this is not perfect
         author = message.guild.get_member(int(message.content[4:22]))
         file = openpyxl.load_workbook("경고.xlsx")
         sheet = file.active
@@ -44,7 +44,7 @@ async def on_message(message):
             i += 1
 
 
-    if message.content.startswith("!팀나누기"):
+    if message.content.startswith("!팀나누기"):  #This was created for the purpose of dividing a team. #ex) !팀나누기 name name name name/1 1 2 2 
         team = message.content[6:]
         peopleteam = team.split("/")
         people = peopleteam[0]
@@ -53,19 +53,16 @@ async def on_message(message):
         teamname = team.split(" ")
         random.shuffle(teamname)
         for i in range(0, len(person)):
-            await message.channel.send(person[i] + ">>>" + teamname[i])
+            await message.channel.send(person[i] + ">>>" + teamname[i])         
 
-    if message.content.startswith("!bs help"):
+    if message.content.startswith("!bs help"):  #This works like a help
         embed = discord.Embed(color=0x00ff00)
         embed.add_field(name="!bs 온라인", value="봇의 온라인여부를 알수있다.", inline=True)
         embed.add_field(name="!팀나누기 (예시: a a b b/1 1 2 2)", value="팀을 랜덤으로 나눌 수 있다.")
         embed.add_field(name="!bs정보", value="자신의 프로필 정보를 알 수 있습니다.", inline=True)
         await message.channel.send(embed=embed)
 
-    if message.content.startswith("!bs sex"):
-        await message.channel.send("어허 너 밴")
-
-    if message.content.startswith("!bs정보"):
+    if message.content.startswith("!bs정보"):     #This is to be able to see your own profile. Name, nickname, registration date, etc.
         date = datetime.datetime.utcfromtimestamp(((int(message.author.id) >> 22) + 1420070400000) / 1000)
         embed = discord.Embed(color=0x0000ff)
         embed.add_field(name="이름", value=message.author.name, inline=True)
